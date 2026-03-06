@@ -1,0 +1,251 @@
+{% extends "game_base.html" %}
+{% block content %}
+
+<!-- 🔥 Full-Screen Countdown Overlay -->
+<div id="countdownOverlay">
+    <div id="countdownCircle">3</div>
+</div>
+
+<div class="game-card">
+
+<h2>🧩 Sudoku Challenge</h2>
+<p>Complete the grid correctly before time runs out!</p>
+
+<!-- 🎯 Colorful Animated Countdown (Removed 60-sec) -->
+<div class="countdown-container" style="display:none;">
+    <div class="countdown-circle" id="countdown">3</div>
+</div>
+
+<table id="grid"></table>
+
+<form method="POST">
+    <input type="hidden" name="score" id="score">
+    <button type="button" class="btn" onclick="submitScore()">Submit Score</button>
+</form>
+
+</div>
+
+<style>
+
+/* ===== Countdown Overlay ===== */
+#countdownOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+}
+
+#countdownCircle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+    font-weight:bold;
+    color:white;
+    background:linear-gradient(45deg,#6569b4,#5b3e9f,#6e6995,#c3bede);
+    background-size:300% 300%;
+    animation:zoom 1s infinite, gradientMove 3s infinite linear;
+    box-shadow:0 0 35px rgba(255,255,255,0.7);
+}
+
+/* Animations */
+@keyframes zoom{
+    0%{transform:scale(0.8);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* ===== Game Card ===== */
+.game-card{
+    max-width:600px;
+    margin:30px auto;
+    padding:25px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    text-align:center;
+    color:white;
+    animation:fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== Grid Styling ===== */
+table{
+    margin:20px auto;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+td{
+    border:1px solid #333;
+    width:45px;
+    height:45px;
+    padding:0;
+}
+
+input{
+    width:100%;
+    height:100%;
+    text-align:center;
+    font-size:18px;
+    border:none;
+    background:#fff;
+}
+
+input:disabled{
+    background:#eee;
+    font-weight:bold;
+}
+
+td:nth-child(3), td:nth-child(6){
+    border-right:2px solid black;
+}
+tr:nth-child(3) td, tr:nth-child(6) td{
+    border-bottom:2px solid black;
+}
+
+.correct{background:#d4edda !important;}
+.wrong{background:#f8d7da !important;}
+
+.btn{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ffcc00;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#ffaa00;
+    transform:scale(1.05);
+}
+
+</style>
+
+<script>
+
+let gameStarted = false;
+
+/* ===== Countdown Timer (3 → 2 → 1 → GO!) ===== */
+let count = 3;
+const countdownEl = document.getElementById("countdownCircle");
+const overlay = document.getElementById("countdownOverlay");
+
+const countdownTimer = setInterval(()=>{
+    count--;
+
+    if(count > 0){
+        countdownEl.innerText = count;
+        countdownEl.style.filter = "hue-rotate("+(count*120)+"deg)";
+    }else if(count === 0){
+        countdownEl.innerText = "GO!";
+        countdownEl.style.filter = "hue-rotate(300deg)";
+    }else{
+        clearInterval(countdownTimer);
+        overlay.style.display = "none"; 
+        gameStarted = true;
+    }
+},1000);
+
+/* ===== Puzzle Data ===== */
+const puzzle = [
+[5,3,0,0,7,0,0,0,0],
+[6,0,0,1,9,5,0,0,0],
+[0,9,8,0,0,0,0,6,0],
+[8,0,0,0,6,0,0,0,3],
+[4,0,0,8,0,3,0,0,1],
+[7,0,0,0,2,0,0,0,6],
+[0,6,0,0,0,0,2,8,0],
+[0,0,0,4,1,9,0,0,5],
+[0,0,0,0,8,0,0,7,9]
+];
+
+const solution = [
+[5,3,4,6,7,8,9,1,2],
+[6,7,2,1,9,5,3,4,8],
+[1,9,8,3,4,2,5,6,7],
+[8,5,9,7,6,1,4,2,3],
+[4,2,6,8,5,3,7,9,1],
+[7,1,3,9,2,4,8,5,6],
+[9,6,1,5,3,7,2,8,4],
+[2,8,7,4,1,9,6,3,5],
+[3,4,5,2,8,6,1,7,9]
+];
+
+/* ===== Create Grid ===== */
+const grid = document.getElementById("grid");
+
+for(let i=0;i<9;i++){
+    let row=grid.insertRow();
+    for(let j=0;j<9;j++){
+        let cell=row.insertCell();
+        let input=document.createElement("input");
+        input.type="text";
+        input.maxLength=1;
+
+        if(puzzle[i][j]!==0){
+            input.value=puzzle[i][j];
+            input.disabled=true;
+        }else{
+            input.addEventListener("input",()=>{
+                if(!gameStarted) input.value=""; 
+                if(!/^[1-9]$/.test(input.value)) input.value="";
+            });
+        }
+
+        cell.appendChild(input);
+    }
+}
+
+/* ===== Submit Score ===== */
+function submitScore(){
+    const inputs=grid.getElementsByTagName("input");
+    let correct=true;
+    let index=0;
+
+    for(let i=0;i<9;i++){
+        for(let j=0;j<9;j++){
+            const input=inputs[index];
+            if(puzzle[i][j]===0){
+                if(parseInt(input.value)===solution[i][j]){
+                    input.classList.add("correct");
+                }else{
+                    input.classList.add("wrong");
+                    correct=false;
+                }
+            }
+            index++;
+        }
+    }
+
+    document.getElementById("score").value = correct ? 100 : 50;
+    alert(correct ? "🎉 Congratulations! You won!" : "❌ Incorrect Answers!");
+}
+
+</script>
+
+{% endblock %}

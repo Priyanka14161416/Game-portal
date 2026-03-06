@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ================= Hero Section ================= -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Game Portal</h1>
+        <p>Play Tic Tac Toe, Sudoku, and Memory Game online. Track your scores and compete with friends!</p>
+
+        {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('register') }}" class="btn">Get Started</a>
+        {% else %}
+            <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        {% endif %}
+    </div>
+
+    <div class="hero-image">
+        <img id="heroSlider"
+             src="https://static.vecteezy.com/system/resources/thumbnails/031/234/176/small_2x/game-joystick-on-colorful-splash-background-neural-network-ai-generated-photo.jpg"
+             alt="Hero Slider">
+    </div>
+</section>
+
+<style>
+    .hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 60px 50px;
+        gap: 10px;
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        margin: 30px auto;
+        max-width: 1200px;
+        flex-wrap: nowrap;
+    }
+
+    .hero-content h1 {
+        font-size: 50px;
+        font-weight: 800;
+        color: #fff;
+        
+    }
+
+    .hero-content p {
+        color: #d8d8d8;
+        margin: 10px 0 20px;
+        font-size: 20px;
+    }
+
+    
+ 
+.hero-content .btn {
+    padding: 12px 28px;
+    background: #dd3f3f;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+.hero-content .btn:active {
+    transform: scale(0.90);
+}
+
+
+
+
+    .hero-content .btn:hover {
+        background: #d44b4b;
+        box-shadow: 0 0 15px rgba(237, 70, 89, 0.7);
+    }
+
+    .hero-image img {
+        width: 500px;
+        max-width: 600px;  
+        height: auto;
+        border-radius: 20px;
+        transition: opacity 0.8s ease-in-out;
+        box-shadow: 0 0 25px rgba(239, 68, 82, 0.5);
+        animation: float 4s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-18px); }
+        100% { transform: translateY(0px); }
+    }
+</style>
+
+<!-- Image Slider Script -->
+<script>
+    const sliderImgs = [
+
+        "https://static.vecteezy.com/system/resources/thumbnails/031/234/176/small_2x/game-joystick-on-colorful-splash-background-neural-network-ai-generated-photo.jpg"
+    
+];
+
+    let index = 0;
+    const slider = document.getElementById("heroSlider");
+
+    setInterval(() => {
+        slider.style.opacity = 0;
+
+        setTimeout(() => {
+            index = (index + 1) % sliderImgs.length;
+            slider.src = sliderImgs[index];
+            slider.style.opacity = 1;
+        }, 700);
+
+    }, 3000);
+</script>
+
+<!-- ================= Games Section ================= -->
+<section class="games">
+    <h1><b><u>Our Games</u></b></h1>
+    <div class="game-cards">
+
+        <!-- Tic Tac Toe Card -->
+        <div class="game-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2BZksmGeyc0GNtbrWmJaJWcIEJd03vmWx7A&s" alt="Tic Tac Toe Banner">
+            <h3>Tic Tac Toe</h3>
+            <p>Classic 3x3 Tic Tac Toe game. Challenge yourself or friends and improve your skills!</p>
+            <a href="{{ url_for('tictactoe') }}" class="btn">Play Now</a>
+        </div>
+
+        <!-- Sudoku Card -->
+        <div class="game-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOJ6YoLb5o4jsB6L66OK41q__F3lWlzVbwWg&s" alt="Sudoku Banner">
+            <h3>Sudoku</h3>
+            <p>Test your logic and concentration with our fun Sudoku puzzles of varying difficulty!</p>
+            <a href="{{ url_for('sudoku') }}" class="btn">Play Now</a>
+        </div>
+
+        <!-- Memory Game Card -->
+        <div class="game-card">
+            <img src="https://m.media-amazon.com/images/I/61CiZEmEe4L.png">
+            <h3>Memory Game</h3>
+            <p>Improve your memory and focus with this challenging card matching game!</p>
+            <a href="{{ url_for('memory') }}" class="btn">Play Now</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= About Section ================= -->
+<section class="about">
+    <div class="container">
+        <h2>About Game Portal</h2>
+
+        <p>
+            Game Portal is a modern and interactive web-based gaming platform developed using Python Flask.
+            It allows users to register, log in, play skill-based games, and track their performance in real time.<br><br>
+
+            Game Portal is designed to improve logical thinking, memory power, and problem-solving skills through fun and engaging games.
+            The platform is fully responsive and suitable for users of all age groups.<br><br>
+
+            <strong>🕹️ Available Games</strong><br><br>
+            ❌⭕ Tic Tac Toe — enhances strategy & logical thinking.<br><br>
+            🔢 Sudoku — improves concentration & analytical skills.<br><br>
+            🧠 Memory Game — boosts memory retention & visual recognition.<br><br>
+
+            <strong>📊 Features</strong><br><br>
+            🔐 Secure User Login & Registration<br>
+            🎯 Real-time Score Tracking<br>
+            🧑‍💼 Admin Dashboard for Users & Scores<br>
+            💻 Fully Responsive UI<br>
+            ⚡ Fast & Beginner-friendly Interface<br><br>
+
+            🚀 <strong>Get Started:</strong> Create an account, log in, and enjoy the games!
+        </p>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+/* 3D ANIMATED BACKGROUND */
+
+body{
+height:100vh;
+
+background: linear-gradient(
+45deg,
+#0f2027,
+#203a43,
+#2c5364,
+#4facfe,
+#00f2fe
+);
+
+background-size:400% 400%;
+
+/* 1 second animation */
+
+animation:bgAnimation 1s infinite alternate;
+
+display:flex;
+flex-direction:column;
+}
+
+/* BACKGROUND ANIMATION */
+
+@keyframes bgAnimation{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+color:white;
+padding:30px;
+font-size:32px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+width:90%;
+max-width:1100px;
+margin:auto;
+}
+
+/* 3D GLASS CONTACT CARD */
+
+.contact-card{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.4),
+inset 0 0 10px rgba(255,255,255,0.05);
+
+transition:0.4s;
+
+}
+
+/* 3D HOVER */
+
+.contact-card:hover{
+
+transform:rotateX(4deg) rotateY(4deg) scale(1.02);
+
+}
+
+/* TITLES */
+
+h2{
+color:white;
+margin-bottom:20px;
+}
+
+/* FORM */
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+input,textarea{
+
+padding:12px;
+border:none;
+border-radius:8px;
+
+background:rgba(255,255,255,0.1);
+color:white;
+
+font-size:16px;
+
+}
+
+input::placeholder,textarea::placeholder{
+color:#ccc;
+}
+
+input:focus,textarea:focus{
+outline:none;
+box-shadow:0 0 10px rgba(0,200,255,0.7);
+}
+
+/* BUTTON */
+
+button{
+
+background:#00bcd4;
+border:none;
+padding:14px;
+border-radius:8px;
+
+font-size:18px;
+color:white;
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:#0097a7;
+transform:scale(1.05);
+
+}
+
+/* CONTACT INFO */
+
+.contact-info{
+
+color:white;
+
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:10px;
+
+}
+
+.contact-info p{
+margin:15px 0;
+font-size:16px;
+}
+
+.contact-info a{
+color:#00e5ff;
+text-decoration:none;
+}
+
+.contact-info a:hover{
+text-decoration:underline;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+color:#ccc;
+padding:25px;
+margin-top:30px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.contact-card{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+Contact Us
+</header>
+
+<div class="container">
+
+<div class="contact-card">
+
+<!-- FORM -->
+
+<div>
+
+<h2>Send Message</h2>
+
+<form action="{{ url_for('contact') }}" method="POST">
+
+<input type="text" name="name" placeholder="Your Name" required>
+
+<input type="email" name="email" placeholder="Your Email" required>
+
+<input type="text" name="subject" placeholder="Subject" required>
+
+<textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+</div>
+
+<!-- CONTACT INFO -->
+
+<div class="contact-info">
+
+<h2>Contact Information</h2>
+
+<p>📍 Rajkot, Gujarat, India</p>
+
+<p>
+📧 Email<br>
+<a href="mailto:priyankadobariya1416@gmail.com">priyankadobariya1416@gmail.com</a><br>
+<a href="mailto:dyc3125@gmail.com">dyc3125@gmail.com</a>
+</p>
+
+<p>
+📞 Phone<br>
+<a href="tel:+918128228390">+91 8128228390</a><br>
+<a href="tel:+919313692088">+91 9313692088</a>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Game Portal | Developed by DPV & DYC
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Tic Tac Toe Score</th>
+        <th>Sudoku Score</th>
+        <th>Memory Score</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.tictactoe_score }}</td>
+        <td>{{ user.sudoku_score }}</td>
+        <td>{{ user.memory_score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

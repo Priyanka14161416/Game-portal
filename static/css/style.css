@@ -1,0 +1,582 @@
+/* ========== GENERAL ========== */
+body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;
+    background: #f4f6f9;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    background: #111;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #ef4040;
+}
+
+.logout a {
+    color: #fff !important;
+}
+
+
+/* ========== CONTAINER ========== */
+.container {
+    min-height: 80vh;
+    padding: 30px;
+}
+
+/* ========== FLASH MESSAGE ========== */
+.flash {
+    background: #ee3e3e;
+    color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background: #111;
+    color: #fffdfd;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.footer-section {
+    min-width: 250px;
+    padding: 20px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: #fcfbfb;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 8px 0;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #db4f4f;
+}
+
+.social-icons a {
+    font-size: 22px;
+    margin-right: 15px;
+    color: #ccc;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #db4f4f;
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    background: #000;
+    color: #aaa;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #1f1c2c, #928dab);
+    color: #f0f0f0;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ---------------- Navbar ---------------- */
+nav {
+    background-color: #0d0d1a;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+nav a {
+    color: #ef4040;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* ---------------- Container ---------------- */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ---------------- Flash Messages ---------------- */
+.flash {
+    background-color: #ffcc00;
+    color: #000;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* ---------------- Headings ---------------- */
+h1, h2, h3 {
+    margin-bottom: 20px;
+    color:#f23c3c;
+}
+
+/* ---------------- Hero Section ---------------- */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 0;
+    flex-wrap: wrap;
+    background: rgba(0,0,0,0.5);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #fcf9f9;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+.hero-content .btn {
+    padding: 12px 25px;
+    background-color: #db4f4f;
+    color: #0d0d1a;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.hero-content .btn:hover {
+    background-color: #db4f4f;
+    color: #fff;
+}
+
+.hero-image img {
+    max-width: 500px;
+    border-radius: 15px;
+}
+
+/* ---------------- Games Section ---------------- */
+.games {
+    margin: 50px 0;
+    text-align: center;
+}
+/* ---------------- Game Page Background ---------------- */
+body.game-page {
+    background: url('https://images.unsplash.com/photo-1542751371-3a69d7c5c364?auto=format&fit=crop&w=1600&q=80') 
+                no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+}
+
+
+
+/* Game board adjustments */
+#board, #sudoku-board, #memory-board {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+    background-color: #ffffff;
+    color: #000;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.cell:hover {
+    background-color: #db4f4f;
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cell {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    .game-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+
+.games h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #db4f4f;
+}
+
+.game-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.game-card {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.game-card .btn:hover {
+    background: linear-gradient(135deg,#f24c4c, #f28484);
+    transform: translateY(-2px);
+}
+
+
+.game-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.game-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.game-card p {
+    font-size: 16px;
+    color: #d1d1d1;
+    margin-bottom: 15px;
+}
+
+.game-card .btn {
+    display: inline-block;
+    background: linear-gradient(135deg,#f24c4c, #f28484);
+    color: #fff !important;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+/* ---------------- Forms ---------------- */
+form {
+    background: rgba(0,0,0,0.5);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #db4f4f;
+    color: #0d0d1a;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #db4f4f;
+    color: #fff;
+}
+
+/* ---------------- Dashboard Cards ---------------- */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,0.15);
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 18px;
+    color: #d1d1d1;
+}
+
+/* ---------------- Table Styling ---------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    color: #fff;
+}
+
+th {
+    background-color: #1a1a2e;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255,255,255,0.1);
+}
+
+tr:hover {
+    background-color: rgba(0,212,255,0.2);
+}
+
+/* ---------------- Game Board ---------------- */
+#board, #sudoku-board, #memory-board {
+    margin-top: 20px;
+    display: grid;
+    gap: 8px;
+}
+
+#board {
+    grid-template-columns: repeat(3, 80px);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav a {
+        margin: 10px 0;
+    }
+    #board {
+        grid-template-columns: repeat(3, 60px);
+    }
+    .cell {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-image img {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.game-wrapper {
+    text-align: center;
+    background: rgba(238, 124, 124, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 450px;
+    margin: auto;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+#sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 5px;
+    margin: 20px auto;
+}
+
+#sudoku-board input {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 6px;
+    border: none;
+}
+
+.fixed {
+    background: #db4f4f;
+    color: #000;
+    font-weight: bold;
+}
+
+.correct {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.wrong {
+    background: #e74c3c;
+    color: #fff;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: #ffffff;
+    color: #000;
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cell:hover {
+    background: #00d4ff;
+    color: #fff;
+}
+
+.reset-btn {
+    margin-top: 15px;
+}
+
+.cell.win {
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px #00d4ff; }
+    to { box-shadow: 0 0 30px #00d4ff; }
+}
+
+.memory-card.flipped {
+    background: #00d4ff;
+    color: #000;
+}
+
+.memory-card.matched {
+    background: #2ecc71;
+    cursor: default;
+}
+
+@media (max-width: 600px) {
+    .memory-board {
+        grid-template-columns: repeat(4, 70px);
+        gap: 10px;
+    }
+
+    .memory-card {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+}

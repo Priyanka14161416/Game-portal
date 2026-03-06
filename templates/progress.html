@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Game Zone Loading...</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    height:100vh;
+    font-family:'Orbitron',sans-serif;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:#000;
+    color:#1dd8f0;
+    position:relative;
+}
+
+/* ===== Background ===== */
+.bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    filter:brightness(.2);
+    z-index:-3;
+}
+
+/* ===== Animated Grid ===== */
+body::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image: 
+        linear-gradient(rgba(255,0,0,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,0,0,0.15) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:gridMove 6s linear infinite;
+    z-index:-2;
+}
+
+@keyframes gridMove{
+    from{background-position:0 0;}
+    to{background-position:0 40px;}
+}
+
+/* ===== Scanline ===== */
+body::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        rgba(0,0,0,0) 50%,
+        rgba(255,0,0,0.05) 50%
+    );
+    background-size:100% 4px;
+    animation:scan 3s linear infinite;
+    z-index:-1;
+}
+
+@keyframes scan{
+    from{background-position:0 0;}
+    to{background-position:0 100px;}
+}
+
+/* ===== Controller Float ===== */
+.controller{
+    width:220px;
+    animation:float 2.5s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+
+/* ===============================
+   🔥 NEW FULL ANIMATED TEXT STYLE
+================================== */
+
+/* Glitch + Color Shift + Flicker */
+#title{
+    font-size:70px;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    margin-top:20px;
+    position:relative;
+    animation:
+        textFlicker 2s infinite alternate,
+        colorShift 3s infinite linear,
+        shake 0.3s infinite alternate;
+}
+
+/* RGB Split Effect */
+#title::before,
+#title::after{
+    content:attr(data-text);
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    color:#e3dfeb;
+    background:transparent;
+    overflow:hidden;
+}
+
+#title::before{
+    transform:translate(-2px,0);
+    color:#e3dfe8;
+    animation:glitchTop 1s infinite linear alternate-reverse;
+}
+
+#title::after{
+    transform:translate(2px,0);
+    color:#e8e5ef;
+    animation:glitchBottom 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop{
+    0%{clip-path:polygon(0 0,100% 0,100% 20%,0 20%);}
+    50%{clip-path:polygon(0 40%,100% 40%,100% 60%,0 60%);}
+    100%{clip-path:polygon(0 80%,100% 80%,100% 100%,0 100%);}
+}
+
+@keyframes glitchBottom{
+    0%{clip-path:polygon(0 10%,100% 10%,100% 30%,0 30%);}
+    50%{clip-path:polygon(0 50%,100% 50%,100% 70%,0 70%);}
+    100%{clip-path:polygon(0 85%,100% 85%,100% 95%,0 95%);}
+}
+
+@keyframes textFlicker{
+    0%{opacity:1;}
+    50%{opacity:0.8;}
+    100%{opacity:1;}
+}
+
+@keyframes colorShift{
+    0%{color:#f6f5f9;}
+    25%{color:#e4e2e8;}
+    50%{color:#dfe9e9;}
+    75%{color:#f3f2f5;}
+    100%{color:#f6f1f2;}
+}
+
+@keyframes shake{
+    from{transform:translateX(-1px);}
+    to{transform:translateX(1px);}
+}
+
+/* ===== Counter ===== */
+#counter{
+    font-size:75px;
+    margin-top:20px;
+    letter-spacing:6px;
+    animation:pulse 1s infinite alternate;
+}
+
+@keyframes pulse{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+/* ===== Loader ===== */
+.loader{
+    margin-top:30px;
+    width:75%;
+    height:14px;
+    background:#111;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#f4f4fa,#f6f5f7,#e4e3f0);
+    transition:width .1s linear;
+}
+
+/* ===== Button ===== */
+.skip{
+    margin-top:40px;
+    padding:12px 45px;
+    font-size:18px;
+    font-weight:bold;
+    border:2px solid #22a6ce;
+    background:transparent;
+    color:#7d0926;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.skip:hover{
+    background:#dfd0d4;
+    color:black;
+    transform:scale(1.1);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" class="controller">
+<h1 id="title" data-text="LOADING GAME ZONE">LOADING GAME ZONE</h1>
+
+<div id="counter">0%</div> 
+
+<div class="loader">
+    <div class="fill" id="fill"></div>
+</div>
+
+<button class="skip" onclick="skipIntro()">SKIP INTRO</button>
+
+<script>
+let count=0;
+let counter=document.getElementById("counter");
+let fill=document.getElementById("fill");
+let title=document.getElementById("title");
+
+let interval=setInterval(()=>{
+    count++;
+    counter.innerText=count+"%";
+    fill.style.width=count+"%";
+
+    if(count>=100){
+        clearInterval(interval);
+        finish();
+    }
+},25);
+
+function finish(){
+    title.innerText="WELCOME GAMER";
+    title.setAttribute("data-text","WELCOME GAMER");
+    setTimeout(()=>{
+        window.location.href="/index";
+    },1000);
+}
+
+function skipIntro(){
+    clearInterval(interval);
+    fill.style.width="100%";
+    counter.innerText="100%";
+    finish();
+}
+</script>
+
+</body>
+</html>
