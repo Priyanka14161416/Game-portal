@@ -57,10 +57,16 @@ def index():
 def about():
     return render_template("about.html")
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+
 # ---------------- Register ----------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+
         username = request.form['username']
         password = request.form['password']
 
@@ -69,6 +75,7 @@ def register():
             return redirect(url_for('register'))
 
         user = User(username=username, password=password)
+
         db.session.add(user)
         db.session.commit()
 
@@ -81,7 +88,9 @@ def register():
 # ---------------- Login ----------------
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     if request.method == 'POST':
+
         user = User.query.filter_by(
             username=request.form['username'],
             password=request.form['password']
@@ -89,8 +98,10 @@ def login():
 
         if user:
             login_user(user)
+
             if user.is_admin:
                 return redirect(url_for('admin_dashboard'))
+
             return redirect(url_for('dashboard'))
 
         flash("Invalid username or password")
@@ -117,11 +128,13 @@ def dashboard():
 @app.route('/admin')
 @login_required
 def admin_dashboard():
+
     if not current_user.is_admin:
         flash("Access denied!")
         return redirect(url_for('dashboard'))
 
     users = User.query.all()
+
     return render_template('admin_dashboard.html', users=users)
 
 
@@ -129,10 +142,14 @@ def admin_dashboard():
 @app.route('/game/tictactoe', methods=['GET', 'POST'])
 @login_required
 def tictactoe():
+
     if request.method == 'POST':
+
         current_user.tictactoe_score = int(request.form['score'])
         db.session.commit()
+
         flash("Tic Tac Toe score saved!")
+
         return redirect(url_for('dashboard'))
 
     return render_template('tictactoe.html')
@@ -141,10 +158,14 @@ def tictactoe():
 @app.route('/game/sudoku', methods=['GET', 'POST'])
 @login_required
 def sudoku():
+
     if request.method == 'POST':
+
         current_user.sudoku_score = int(request.form['score'])
         db.session.commit()
+
         flash("Sudoku score saved!")
+
         return redirect(url_for('dashboard'))
 
     return render_template('sudoku.html')
@@ -153,7 +174,9 @@ def sudoku():
 @app.route('/game/memory', methods=['GET', 'POST'])
 @login_required
 def memory():
+
     if request.method == 'POST':
+
         score = int(request.form['score'])
         time_taken = request.form['time']
 
@@ -162,6 +185,7 @@ def memory():
             score=score,
             time_taken=time_taken
         )
+
         db.session.add(entry)
         db.session.commit()
 
@@ -173,24 +197,19 @@ def memory():
 
     return render_template('memory.html', leaderboard=leaderboard)
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
 
+# ---------------- Initialize Database ----------------
+with app.app_context():
 
-# ---------------- Main ----------------
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+    db.create_all()
 
-        # Create admin user
-        if not User.query.filter_by(username='admin').first():
-            admin = User(
-                username='admin',
-                password='admin123',
-                is_admin=True
-            )
-            db.session.add(admin)
-            db.session.commit()
+    if not User.query.filter_by(username='admin').first():
 
-    app.run(debug=True)
+        admin = User(
+            username='admin',
+            password='admin123',
+            is_admin=True
+        )
+
+        db.session.add(admin)
+        db.session.commit()
