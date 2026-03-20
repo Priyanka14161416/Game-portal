@@ -15,12 +15,14 @@
     </div>
 
     <div class="hero-image">
+        <!-- ✅ Only Images (NO LOGO) -->
         <img id="heroSlider"
-             src="https://img.freepik.com/free-vector/gradient-gaming-logo-template_52683-132733.jpg?semt=ais_hybrid&w=740&q=80"
+             src="https://static.vecteezy.com/system/resources/thumbnails/031/234/176/small_2x/game-joystick-on-colorful-splash-background-neural-network-ai-generated-photo.jpg"
              alt="Game Banner">
     </div>
 </section>
 
+<!-- ================= STYLE ================= -->
 <style>
 .hero {
     display: flex;
@@ -28,7 +30,7 @@
     align-items: center;
     padding: 60px 50px;
     gap: 20px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.35);
     backdrop-filter: blur(12px);
     border-radius: 20px;
     margin: 30px auto;
@@ -52,7 +54,7 @@
     font-size: 18px;
 }
 
-.hero-content .btn {
+.btn {
     padding: 12px 28px;
     background: #dd3f3f;
     color: #fff;
@@ -63,12 +65,12 @@
     display: inline-block;
 }
 
-.hero-content .btn:hover {
+.btn:hover {
     background: #ff4d4d;
     box-shadow: 0 0 15px rgba(237, 70, 89, 0.7);
 }
 
-.hero-content .btn:active {
+.btn:active {
     transform: scale(0.90);
 }
 
@@ -81,11 +83,16 @@
     width: 100%;
     max-width: 450px;
     border-radius: 20px;
-    transition: opacity 0.8s ease-in-out;
+    transition: opacity 0.8s ease-in-out, transform 0.5s;
     box-shadow: 0 0 25px rgba(239, 68, 82, 0.5);
     animation: float 4s infinite ease-in-out;
 }
 
+.hero-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Floating animation */
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-18px); }
@@ -101,18 +108,21 @@
 }
 </style>
 
-<!-- ================= Image Slider Script ================= -->
+<!-- ================= IMAGE SLIDER SCRIPT ================= -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const sliderImgs = [
-        "https://img.freepik.com/free-vector/gradient-gaming-logo-template_52683-132733.jpg",
         "https://static.vecteezy.com/system/resources/thumbnails/031/234/176/small_2x/game-joystick-on-colorful-splash-background-neural-network-ai-generated-photo.jpg",
-        "https://wallpapers.com/images/hd/gaming-background-1920-x-1080-1y0g9c6k9x0j6z0c.jpg"
+        "https://wallpapers.com/images/hd/gaming-background-1920-x-1080-1y0g9c6k9x0j6z0c.jpg",
+        "https://img.freepik.com/free-vector/gaming-background-with-console_23-2147892309.jpg"
     ];
 
     let index = 0;
     const slider = document.getElementById("heroSlider");
+
+    // ✅ Start from first image (NO logo flash)
+    slider.src = sliderImgs[0];
 
     setInterval(() => {
         slider.style.opacity = 0;
@@ -137,21 +147,21 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2BZksmGeyc0GNtbrWmJaJWcIEJd03vmWx7A&s" alt="Tic Tac Toe">
             <h3>Tic Tac Toe</h3>
-            <p>Classic 3x3 Tic Tac Toe game. Challenge yourself or friends!</p>
+            <p>Classic 3x3 Tic Tac Toe game.</p>
             <a href="{{ url_for('tictactoe') }}" class="btn">Play Now</a>
         </div>
 
         <div class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOJ6YoLb5o4jsB6L66OK41q__F3lWlzVbwWg&s" alt="Sudoku">
             <h3>Sudoku</h3>
-            <p>Test your logic with fun Sudoku puzzles!</p>
+            <p>Improve logic and concentration.</p>
             <a href="{{ url_for('sudoku') }}" class="btn">Play Now</a>
         </div>
 
         <div class="game-card">
             <img src="https://m.media-amazon.com/images/I/61CiZEmEe4L.png" alt="Memory Game">
             <h3>Memory Game</h3>
-            <p>Boost your memory with this card matching game!</p>
+            <p>Boost memory and focus.</p>
             <a href="{{ url_for('memory') }}" class="btn">Play Now</a>
         </div>
 
